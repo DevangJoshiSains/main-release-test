@@ -18,5 +18,5 @@ jobs:
           git remote add source_repo https://github.com/DevangJoshiSains/main-release-test.git
           git fetch source_repo
           git checkout main
-          git merge source_repo/release --no-edit
+          git merge --allow-unrelated-histories source_repo/release --no-edit
           git push origin main
