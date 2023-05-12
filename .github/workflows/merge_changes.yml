@@ -1,22 +1,25 @@
-name: Merge Changes
+name: Auto Merge
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - release  # Trigger the workflow on push event for release branch
 
 jobs:
   merge:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3  # This step checks out the repository where your workflow is running
 
-      - name: Merge changes
+      - name: Set up Git
         run: |
-          git remote add source_repo https://github.com/DevangJoshiSains/main-release-test.git
-          git fetch source_repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Merge to Main
+        run: |
+          git fetch origin main
           git checkout main
-          git merge source_repo/release --no-edit
+          git merge --no-edit release
           git push origin main
