@@ -22,4 +22,5 @@ jobs:
           git fetch origin main
           git checkout main
           git merge --allow-unrelated-histories --no-edit release
-          git push origin main
+          git push origin main 
+          
